@@ -1,15 +1,106 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <script src="codigo.js"></script>
+    <title>Tienda Buggy - Práctica DevTools</title>
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; padding: 20px; background-color: #f0f2f5; }
+        .card { max-width: 500px; margin: 40px auto; background: white; padding: 30px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        h1 { color: #2c3e50; text-align: center; }
+        .product-info { border-bottom: 2px solid #eee; padding-bottom: 20px; margin-bottom: 20px; }
+        .price-tag { color: #27ae60; font-size: 1.5em; font-weight: bold; }
+        .input-group { margin: 15px 0; display: flex; align-items: center; gap: 10px; }
+        input { padding: 5px; width: 60px; font-size: 1em; }
+        
+        /* ERROR 1: Estilo CSS impide ver el botón */
+        #btn-pagar {
+            display: none; 
+            width: 100%; padding: 12px; background-color: #3498db; color: white; border: none; border-radius: 6px; cursor: pointer; font-size: 16px; transition: background 0.3s;
+        }
+        #btn-pagar:hover { background-color: #2980b9; }
+        
+        #resultado { margin-top: 25px; text-align: center; font-size: 1.2em; font-weight: bold; color: #34495e; }
+        #api-status { text-align: center; font-size: 0.9em; margin-top: 10px; color: #7f8c8d; }
+    </style>
 </head>
 <body>
 
-    <button id="btn-tester" data-valor="10000" data-valor2="50000"   >Tester</button>
+<div class="card">
+    <h1>🛒 Carrito de Compras</h1>
+    
+    <div class="product-info">
+        <h3>Auriculares Noise-Cancel</h3>
+        <p>Precio Unitario: <span class="price-tag">$<span id="precio-base">150</span></span></p>
+        <div class="input-group">
+            <label for="cantidad">Cantidad:</label>
+            <input type="number" id="cantidad" value="1" min="1">
+        </div>
+    </div>
+
+    <button id="btn-pagar" onclick="procesarCompra()">Pagar Ahora</button>
+    
+    <div id="resultado">Total a pagar: $0</div>
+    <div id="api-status">Esperando transacción...</div>
+</div>
+
+<script>
+    console.log("Sistema de ventas v1.0 cargado correctamente.");
+
+    function procesarCompra() {
+        console.log("Iniciando proceso de compra...");
+        
+        const precioTexto = document.getElementById('precio-base').innerText;
+        const precio = parseInt(precioTexto);
+        const cantidad = parseInt(document.getElementById('cantidad').value);
+
+        // ERROR 2: Lógica matemática incorrecta
+        // debugger; // Descomentar esta línea si quieres forzar el breakpoint desde código
+        let total = calcularTotal(precio, cantidad);
+
+        if (total < 0) {
+            console.error("Error Crítico: El total no puede ser negativo.");
+            return;
+        }
+
+        document.getElementById('resultado').innerText = "Total a pagar: $" + total;
+        console.log(`Cálculo finalizado. Precio: ${precio}, Cantidad: ${cantidad}, Total: ${total}`);
+
+        // Llamada al servidor
+        verificarStock();
+    }
+
+    function calcularTotal(p, c) {
+        // ERROR DE LÓGICA AQUÍ
+        // Debería ser multiplicación (*), pero hay una resta (-)
+        return p - c; 
+    }
+
+    function verificarStock() {
+        // ERROR 3: Endpoint incorrecto (404)
+        const urlAPI = '[https://jsonplaceholder.typicode.com/posts/verificar-stock-inexistente](https://jsonplaceholder.typicode.com/posts/verificar-stock-inexistente)';
+        
+        console.log(`Consultando API: ${urlAPI}`);
+        document.getElementById('api-status').innerText = "Conectando con inventario...";
+
+        fetch(urlAPI)
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Estado HTTP: ${response.status}`);
+                }
+                return response.json();
+            })
+            .then(data => {
+                document.getElementById('api-status').innerText = "Stock confirmado ✔️";
+                document.getElementById('api-status').style.color = "green";
+            })
+            .catch(error => {
+                console.error("Fallo en la petición de red:", error);
+                document.getElementById('api-status').innerText = "Error de conexión con inventario ❌";
+                document.getElementById('api-status').style.color = "red";
+            });
+    }
+</script>
 
 </body>
 </html>

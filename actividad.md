@@ -169,7 +169,7 @@ Misión:
 
 4) Mantén la consola abierta para monitorear los siguientes pasos.
 
-## 4. Pestaña SOURCES: Depuración paso a paso (20 min)
+## 4. Pestaña SOURCES: Depuración paso a paso 
 Síntoma: La matemática no cuadra. Necesitamos ver cómo el código calcula el total exactamente en el momento en que ocurre.
 
 Misión:
@@ -201,7 +201,7 @@ Misión:
 * Prueba de nuevo (tendrás que volver a arreglar el botón en Elements o borrar el display: none en tu código fuente permanentemente).
 
 
-## 5. Pestaña NETWORK: ¿Por qué falla el inventario? (10 min)
+## 5. Pestaña NETWORK: ¿Por qué falla el inventario?
 Síntoma: El mensaje "Esperando transacción..." cambia a "Error de conexión".
 
 Misión:

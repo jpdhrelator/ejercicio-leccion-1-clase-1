@@ -1,7 +1,6 @@
 # Taller Práctico: Depuración Web con Chrome DevTools
 
-**Duración:** 60 minutos  
-**Nivel:** Principiante / Intermedio  
+
 **Objetivo:** Diagnosticar y corregir errores de interfaz (UI), lógica (JS) y comunicación (Network) utilizando las herramientas de desarrollo del navegador.
 
 ---

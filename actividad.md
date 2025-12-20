@@ -135,7 +135,7 @@ Misión:
 
 2) Asegúrate de estar en la pestaña Elements.
 
-3) Expande las etiquetas del HTML (<body>, <div class="card">) hasta encontrar <button id="btn-pagar">.
+3) Expande las etiquetas del HTML ( ``<body>``, ``<div class="card">``) hasta encontrar ``<button id="btn-pagar">``.
 
 4) Al seleccionarlo, mira el panel de Styles (Estilos) en la parte inferior o lateral derecha.
 
